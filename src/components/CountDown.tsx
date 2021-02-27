@@ -23,7 +23,7 @@ export function CountDown() {
 
   function resetCountDown() {
     setActive(false);
-    setTime(/*25 * 60*/5);
+    setTime(25 * 60);
     clearTimeout(countDownTimeout);
   }
   useEffect(() => {
@@ -89,8 +89,7 @@ export function CountDown() {
           )}
         </>
 
-      )
-    }
+      )}
     </div>
   );
 }

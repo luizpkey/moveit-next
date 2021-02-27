@@ -71,5 +71,5 @@
 
 .CountdownButtonActive:hover{
     background: var(--red);
-    color: var(--white);
+    color: var(--white );
 }

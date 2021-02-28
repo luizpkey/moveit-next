@@ -12,6 +12,7 @@ import { Profile } from '../components/profile';
 import { ChallengeBox } from '../components/ChallengeBox';
 
 import styles from '../styles/Pages/Home.module.css';
+import { CountDownProvider } from '../contexts/CountDownContext';
 
 export default function Home() {
   return (
@@ -20,16 +21,18 @@ export default function Home() {
         <title>Inócio | Movit</title>
       </Head>
       <ExperienceBar />
-      <section>
-        <div>
-          <Profile />
-          <CompletedChallenges />
-          <CountDown />
-        </div>
-        <div>
-          <ChallengeBox />
-        </div>
-      </section>
+      <CountDownProvider>
+        <section>
+          <div>
+            <Profile />
+            <CompletedChallenges />
+            <CountDown />
+          </div>
+          <div>
+            <ChallengeBox />
+          </div>
+        </section>
+      </CountDownProvider>
     </div>
   );
 }

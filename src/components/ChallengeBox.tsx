@@ -1,32 +1,50 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable import/extensions */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable import/no-unresolved */
+import { useContext } from 'react';
+import { ChallengesContext } from '../contexts/ChallengeContext';
+import { CountDownContext } from '../contexts/CountDownContext';
 import styles from '../styles/components/ChallengeBox.module.css';
 
 // eslint-disable-next-line import/prefer-default-export
 export function ChallengeBox() {
-  const hasChallengeActive = true;
+  const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
+  const { resetCountDown } = useContext(CountDownContext);
+  function handleChallengeSucceeded() {
+    completeChallenge();
+    resetCountDown();
+  }
+  function handleChallengeFailed() {
+    resetChallenge();
+    resetCountDown();
+  }
   return (
     <div className={styles.challengeBoxContainer}>
-      { hasChallengeActive
+      { activeChallenge
         ? (
           <div className={styles.challengeActive}>
-            <header> Ganhe 400 xp</header>
+            <header>
+              {`Ganhe ${activeChallenge.amount} xp`}
+            </header>
             <main>
-              <img src="icons/body.svg" alt="a" />
+              <img src={`icons/${activeChallenge.type}.svg`} alt="a" />
               <strong>Novo Desafio</strong>
-              <p>Levante e faça uma caminhada de 3 minutos.</p>
+              <p>{activeChallenge.description}</p>
             </main>
             <footer>
               <button
                 type="button"
                 className={styles.challengeFailedButton}
+                onClick={handleChallengeFailed}
               >
                 Falhei
               </button>
               <button
                 type="button"
                 className={styles.challengeSuccesedButton}
+                onClick={handleChallengeSucceeded}
               >
                 Completei
               </button>
